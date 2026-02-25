@@ -70,7 +70,6 @@ bool operator==(double d, const ComplexNumber &c) {
     return (c.real == d && c.imag == 0);
 }
 
-
 double ComplexNumber::abs(){
 	double z = sqrt(real*real + imag*imag);
 	return z;
