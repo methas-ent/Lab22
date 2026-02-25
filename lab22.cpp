@@ -30,6 +30,76 @@ ComplexNumber ComplexNumber::operator-(const ComplexNumber &c){
 
 //Write your code here
 
+ComplexNumber ComplexNumber::operator*(const ComplexNumber &c){
+	return ComplexNumber(real*c.real - imag*c.imag,
+						 real*c.imag + imag*c.real);
+}
+
+ComplexNumber ComplexNumber::operator/(const ComplexNumber &c){
+	double denom = c.real*c.real + c.imag*c.imag;
+	return ComplexNumber ((real*c.real + imag*c.imag)/denom,
+						  (imag*c.real - real*c.imag)/denom);;
+}
+
+bool ComplexNumber::operator==(const ComplexNumber &c){
+	return (real == c.real && imag == c.imag);
+}
+
+
+ComplexNumber operator+(double s,const ComplexNumber &c){
+	return ComplexNumber(s+c.real,c.imag);
+}
+
+ComplexNumber operator-(double s,const ComplexNumber &c){
+	return ComplexNumber(s-c.real,-c.imag);
+}
+
+ComplexNumber operator*(double s, const ComplexNumber &c) {
+    return ComplexNumber(s*c.real, s*c.imag);
+}
+
+ComplexNumber operator/(double d, const ComplexNumber &c) {
+    double denom = c.real*c.real + c.imag*c.imag;
+    return ComplexNumber(
+        (d*c.real)/denom,
+        (-d*c.imag)/denom
+    );
+}
+
+bool operator==(double d, const ComplexNumber &c) {
+    return (c.real == d && c.imag == 0);
+}
+
+
+double ComplexNumber::abs(){
+	double z = sqrt(real*real + imag*imag);
+	return z;
+}
+
+double ComplexNumber::angle(){
+	double theta = atan2(imag,real)*180.0 / M_PI;
+	return theta;
+}
+
+ostream& operator<<(ostream &cout ,const ComplexNumber &c){
+	if(c.real == 0 && c.imag == 0){
+		cout << 0;
+	}else if(c.real == 0){
+		cout<<c.imag<<"i";
+	}else if(c.imag == 0){
+		cout<<c.real;
+	}else {
+		cout<<c.real;
+		if(c.imag > 0){
+			cout<<"+"<<c.imag<<"i";
+		}else{
+			cout<<c.imag<<"i";
+		}
+	}
+
+	return cout;
+}
+
 int main(){
 	ComplexNumber a(1.5,2),b(3.2,-2.5),c(-1,1.2);	
 	cout << a << "\n";
